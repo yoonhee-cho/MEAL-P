@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import Weeklyprices from './components/weeklyprices'
+import RecipeSearch from './components/RecipeSearch'
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ class Routes extends Component {
               path="/weeklyprices/:userId"
               component={Weeklyprices}
             />
+            <Route path="/recipeSearch" component={RecipeSearch} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
