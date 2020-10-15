@@ -4,14 +4,19 @@ import Form from './form'
 const API_KEY = ''
 
 class RecipeSearch extends Component {
+  state = {
+    recipes: []
+  }
   getRecipe = async e => {
     e.preventDefault()
     const recipeName = e.target.elements.recipeName.value
-    const apiCall = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://recipesapi.herokuapp.com/api/search?q=chicken&page=3`
-    )
-    const data = await apiCall.json()
-    console.log('data', data)
+    console.log('this.state.recipes', this.state.recipes)
+
+    // const apiCall = await fetch(
+    //   `https://cors-anywhere.herokuapp.com/https://recipesapi.herokuapp.com/api/search?q=chicken&page=3`
+    // )
+    // const data = await apiCall.json()
+    this.setState({recipes: data.recipes})
   }
   //instead of using (this is kinda decrecated in react 16)
   // constructor(){
