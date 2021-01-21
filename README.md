@@ -1,5 +1,5 @@
 <h1><p align="center"> MEAL :P</p></h1>
-<h2><p align="center"> Efficient meal plan, grocery shopping, & recipe managing tool</p></h2>
+<h2><p align="center"> Efficient meal plan, grocery shopping, & recipes managing tool</p></h2>
 
 <!-- Plan your meals, manage your grocery shopping list within your budget, get meal plan ideas, and store your own recipes !  -->
 ## ⭐️ Main Features <br>
