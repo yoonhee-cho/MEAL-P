@@ -1,12 +1,14 @@
 <h1><p align="center"> MEAL :P</p></h1>
-<h2><p align="center"> Efficient meal plan, grocery shopping, recipe managing tool</p></h2>
+<h2><p align="center"> Efficient meal plan, grocery shopping, & recipe managing tool</p></h2>
 
 <!-- Plan your meals, manage your grocery shopping list within your budget, get meal plan ideas, and store your own recipes !  -->
 ## ⭐️ Main Features <br>
-1. Write a grocery shopping list based on the menus on your meal plan <br/>
-2. Adjust the items based on the estimated price within your budget<br/>
-3. Search recipes by ingredients to get meal plan ideas<br/>
-4. Post your own recipes you want to keep<br/>
+<img width="579" alt="Screen Shot 2021-01-21 at 12 30 54 PM" src="https://user-images.githubusercontent.com/42276116/105388367-8fe8c580-5be4-11eb-9213-59585e039d70.png">
+1. Search recipes by ingredients to get meal plan ideas<br/>
+2. Plan your meals on the calendar <br/>
+3. Write a grocery shopping list based on your meal menus<br/>
+4. Adjust the items based on the estimated price within your budget<br/>
+5. Post your own recipes you want to keep<br/>
 
 ## 🛠 Tech stacks that I used for this project
 <p align="left"> 
