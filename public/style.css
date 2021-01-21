@@ -1,0 +1,88 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+h1 {
+  font-family: 'Quicksand', sans-serif;
+  padding-left: 1rem;
+}
+
+h2 {
+  font-family: 'Quicksand', sans-serif;
+  padding-left: 2rem;
+  color: white;
+}
+
+h3 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+#weeklyPricesContainer {
+  padding: 1rem 5rem 0 5rem;
+  height: 100vh;
+  background: #0b686b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #011b64,
+    #8e2de2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #004146,
+    #6b7aa0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.chartContainer {
+  width: 75%;
+  padding-right: 2rem;
+}
+
+.fitnessRight {
+  width: 25%;
+  padding-left: 2rem;
+}
+
+#addMeasurement {
+  width: 300px;
+  background-color: whitesmoke;
+}
+
+#addMeasurementHeader {
+  letter-spacing: 0.1rem;
+  padding: 1rem 0 1rem 1rem;
+  font-size: 1rem;
+}
+
+#addMeasurementHeader h3 {
+  text-transform: uppercase;
+}
+
+#addMeasurementSubmit {
+  /* background: var(--purple); */
+  background-color: #6b7aa0;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+}
