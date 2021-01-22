@@ -5,29 +5,50 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, userId}) => (
-  <div>
-    <h1>Grorie</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+  <div className="navbar">
+    <div className="navbar__logo">
+      <i className="fas fa-utensils" />
+      <Link to="/home" className="navbar__logo-text">
+        MEAL :P
+      </Link>
+    </div>
 
+    {isLoggedIn ? (
+      <ul className="navbar__menu">
+        {/* The navbar will show these links after you log in */}
+        {/* <li><Link to="/home">Home</Link></li> */}
+        <li>
           <Link to="/recipeSearch">Recipe Search</Link>
-          <Link to={'/weeklyprices/' + userId}>Weekly Spending</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
+        </li>
+        <li>
+          <Link to={'/weeklyprices/' + userId}>Meal Plan</Link>
+        </li>
+        <li>
+          <Link to="/home">My Recipes</Link>
+        </li>
+      </ul>
+    ) : (
+      <div className="navbar__menu" />
+    )}
+
+    {isLoggedIn ? (
+      <div className="navbar__button">
+        <a href="#" onClick={handleClick} className="nav-button">
+          {' '}
+          Logout{' '}
+        </a>
+      </div>
+    ) : (
+      <div className="navbar__button">
+        {/* The navbar will show these links before you log in */}
+        <Link to="/login" className="nav-button">
+          Login
+        </Link>
+        <Link to="/signup" className="nav-button">
+          Sign Up
+        </Link>
+      </div>
+    )}
   </div>
 )
 
