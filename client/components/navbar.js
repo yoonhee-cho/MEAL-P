@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import Burger from './Burger'
 
 const Navbar = ({handleClick, isLoggedIn, userId}) => (
   <div className="navbar">
@@ -13,23 +14,7 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => (
       </Link>
     </div>
 
-    {isLoggedIn ? (
-      <ul className="navbar__menu">
-        {/* The navbar will show these links after you log in */}
-        {/* <li><Link to="/home">Home</Link></li> */}
-        <li>
-          <Link to="/recipeSearch">Recipe Search</Link>
-        </li>
-        <li>
-          <Link to={'/weeklyprices/' + userId}>Meal Plan</Link>
-        </li>
-        <li>
-          <Link to="/home">My Recipes</Link>
-        </li>
-      </ul>
-    ) : (
-      <div className="navbar__menu" />
-    )}
+    {isLoggedIn ? <Burger userId={userId} /> : <div className="navbar__menu" />}
 
     {isLoggedIn ? (
       <div className="navbar__button">
