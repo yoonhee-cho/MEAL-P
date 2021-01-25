@@ -1,4 +1,3 @@
-import {render} from 'enzyme'
 import React from 'react'
 
 const Form = props => {
