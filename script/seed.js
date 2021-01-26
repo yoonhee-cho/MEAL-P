@@ -32,32 +32,38 @@ async function seed() {
     Groceryitem.create({
       name: 'egg',
       price: 399,
-      category: 'diary'
+      category: 'diary',
+      userId: 1
     }),
     Groceryitem.create({
       name: 'onion',
       price: 79,
-      category: 'vegetable'
+      category: 'vegetable',
+      userId: 1
     }),
     Groceryitem.create({
       name: 'potato',
       price: 69,
-      category: 'vegetable'
+      category: 'vegetable',
+      userId: 1
     }),
     Groceryitem.create({
       name: 'avocado',
       price: 129,
-      category: 'vegetable'
+      category: 'vegetable',
+      userId: 1
     }),
     Groceryitem.create({
       name: 'garlic',
       price: 49,
-      category: 'vegetable'
+      category: 'vegetable',
+      userId: 1
     }),
     Groceryitem.create({
       name: 'arugula',
       price: 249,
-      category: 'vegetable'
+      category: 'vegetable',
+      userId: 1
     }),
     Groceryitem.create({
       name: 'cucumber',
