@@ -117,33 +117,40 @@ async function seed() {
     Groceryitem.create({
       name: 'sourdough bread',
       price: 299,
-      category: 'diary'
+      category: 'grain'
     })
   ])
 
-  const groceryInOrders = await Promise.all([
-    GroceryInOrder.create({
-      qty: 3,
-      totalPrice: 123
+  const recipes = await Promise.all([
+    Recipe.create({
+      name: 'banana yogurt cake',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      category: 'baking'
     }),
-    GroceryInOrder.create({
-      qty: 2,
-      totalPrice: 429
+    Recipe.create({
+      name: 'double chocolate chip cookie',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      category: 'baking'
     })
   ])
 
-  const orders = await Promise.all([
-    Order.create({
-      date: '2020-10-04 23:20:30.847-05',
-      userId: 1
+  const menus = await Promise.all([
+    Menu.create({
+      name: 'avocado toast',
+      category: 'breakfast'
+    }),
+    Menu.create({
+      name: 'pork kimchi stew',
+      category: 'lunch'
     })
   ])
 
   console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${weeklyprices.length} weeklyprices`)
   console.log(`seeded ${groceryitems.length} groceryitems`)
-  console.log(`seeded ${groceryInOrders.length} groceryitemsInOrders`)
-  console.log(`seeded ${orders.length} orders`)
+  console.log(`seeded ${recipes.length} groceryitemsInOrders`)
+  console.log(`seeded ${menus.length} orders`)
 
   console.log(`seeded successfully`)
 }
