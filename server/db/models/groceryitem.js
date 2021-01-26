@@ -14,11 +14,11 @@ const Groceryitem = db.define('groceryitem', {
     type: Sequelize.ENUM(
       'fruit',
       'vegetable',
+      'grain',
       'diary',
-      'meat',
       'seafood',
-      'spice',
-      'sauce',
+      'meat',
+      'spice/sauce',
       'etc'
     ),
     allowNull: false
