@@ -1,6 +1,7 @@
 /* ---------------------- GLOBAL --------------------------------- */
 :root {
   --primary: #ffcb8a;
+  --lightblue: #b0bdff;
 }
 
 body {
@@ -27,7 +28,7 @@ a {
   opacity: 50%;
   padding: 8px 20px;
   transition: all 0.3s ease-out;
-  background: var(--primary);
+  background: var(--lightblue);
   transition: 250ms;
 }
 
@@ -36,11 +37,12 @@ a {
 }
 
 .btn--outline {
-  background-color: transparent;
-  color: #fff;
+  background-color: #b0bdff;
+
+  color: #b0bdff;
   padding: 8px 20px;
   border-radius: 8px;
-  border: 1px solid var(--primary);
+  border: 1px solid var(--lightblue);
   transition: all 0.3s ease-out;
 }
 
@@ -57,6 +59,23 @@ a {
   border-radius: 4px;
   font-size: 20px;
   color: #fff;
+}
+
+.btn-search {
+  background: #b0bdff;
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-size: 20px;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+.btn-search:hover {
+  opacity: 50%;
+  padding: 12px 26px;
+  transition: all 0.3s ease-out;
+  background: #b0bdff;
+  transition: 250ms;
 }
 
 /* ---------------------- NAV BAR --------------------------------- */
@@ -221,6 +240,8 @@ a {
     display: none;
   }
 }
+
+/* -----------------------RECIPE SEARCH-------------------------------- */
 
 /* ------------------------------------------------------- */
 

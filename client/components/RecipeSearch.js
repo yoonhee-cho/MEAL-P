@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Form from './form'
 import Recipes from './Recipes'
+import {Grid} from '@material-ui/core'
 
 const API_KEY = ''
 
@@ -24,14 +25,22 @@ class RecipeSearch extends Component {
 
   render() {
     return (
-      <div className="RecipeSearch">
-        <header className="RecipeSearch-header">
-          <h1 className="RecipeSearch-title">Recipe Search</h1>
-        </header>
+      <div className="recipeSearch">
+        <Grid container>
+          <Grid item xs={false} sm={2} />
+          <Grid item xs={12} sm={8}>
+            <Form getRecipe={this.getRecipe} />
+          </Grid>
+          <Grid item xs={false} sm={2} />
+        </Grid>
 
-        <Form getRecipe={this.getRecipe} />
-
-        <Recipes recipes={this.state.recipes} />
+        <Grid container>
+          <Grid item xs={false} sm={2} />
+          <Grid item xs={12} sm={8}>
+            <Recipes recipes={this.state.recipes} />
+          </Grid>
+          <Grid item xs={false} sm={2} />
+        </Grid>
       </div>
     )
   }

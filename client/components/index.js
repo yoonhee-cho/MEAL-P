@@ -10,6 +10,15 @@ export {default as Navbar} from './Navbar/Navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 
+// ========== RECIPES SEARCH ==========
+export {default as RecipeSearch} from './RecipeSearch'
+export {default as Recipes} from './Recipes'
+export {default as RecipeCard} from './RecipeCard'
+
+// ========== MEAL PLAN ==========
+
+// ========== MY RECIPE STORAGE ==========
+
 // ========== WEEKLY PRICES ==========
 export {default as WeeklypriceCard} from './weeklypriceCard'
 export {default as AddWeeklyprices} from './addWeeklyprices'
