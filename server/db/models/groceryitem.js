@@ -10,8 +10,17 @@ const Groceryitem = db.define('groceryitem', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  where: {
-    type: Sequelize.ENUM('Trader Joes', 'H Mart', 'Whole Foods Market'),
+  category: {
+    type: Sequelize.ENUM(
+      'fruit',
+      'vegetable',
+      'diary',
+      'meat',
+      'seafood',
+      'spice',
+      'sauce',
+      'etc'
+    ),
     allowNull: false
   },
   qty: {

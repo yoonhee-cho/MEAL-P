@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Form from './form'
+import Form from './Form'
 import Recipes from './Recipes'
 import {Grid} from '@material-ui/core'
 

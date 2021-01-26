@@ -11,8 +11,10 @@ export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 
 // ========== RECIPES SEARCH ==========
+
 export {default as RecipeSearch} from './RecipeSearch'
 export {default as Recipes} from './Recipes'
+export {default as Form} from './Form'
 export {default as RecipeCard} from './RecipeCard'
 
 // ========== MEAL PLAN ==========
