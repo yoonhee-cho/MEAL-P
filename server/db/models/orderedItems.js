@@ -15,8 +15,7 @@ const OrderedItems = db.define('orderedItems', {
   totalPrice: {
     // total price in pennies
     type: Sequelize.INTEGER,
-    defaultValue: 0,
-    get() {
+    get: function() {
       return this.price * this.quantity
     }
   }
