@@ -6,9 +6,14 @@ const Groceryitem = db.define('groceryitem', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  // price will be pennies and converted on the frontend
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    get: function() {
+      let pennies = this.getDataValue('price')
+      return pennies / 100
+    }
   },
   category: {
     type: Sequelize.ENUM(
@@ -19,14 +24,16 @@ const Groceryitem = db.define('groceryitem', {
       'seafood',
       'meat',
       'spice/sauce',
+      'snack',
       'etc'
     ),
     allowNull: false
-  },
-  qty: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1
   }
+  //item supply stock // I guess I don't need this for my app
+  // stock: {
+  //   type: Sequelize.INTEGER,
+  //   defaultValue: 1
+  // }
 })
 
 module.exports = Groceryitem

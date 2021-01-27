@@ -1,7 +1,15 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Groceryitem, Recipe, Menu} = require('../server/db/models')
+const {
+  User,
+  Groceryitem,
+  Order,
+  OrderedItems,
+  Recipe,
+  Menu
+} = require('../server/db/models')
+const {itemsJson} = require('./data')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,7 +20,8 @@ async function seed() {
       firstName: 'Yoon',
       lastName: 'Cho',
       email: 'yooncho@gmail.com',
-      password: '123'
+      password: '123',
+      isAdmin: true
     }),
     User.create({
       firstName: 'Cody',
@@ -28,106 +37,45 @@ async function seed() {
     })
   ])
 
-  const groceryitems = await Promise.all([
-    Groceryitem.create({
-      name: 'egg',
-      price: 399,
-      category: 'diary',
-      userId: 1
+  const orderedItems = await Promise.all([
+    OrderedItems.create({
+      quantity: 2,
+      price: 10
     }),
-    Groceryitem.create({
-      name: 'onion',
-      price: 79,
-      category: 'vegetable',
-      userId: 1
-    }),
-    Groceryitem.create({
-      name: 'potato',
-      price: 69,
-      category: 'vegetable',
-      userId: 1
-    }),
-    Groceryitem.create({
-      name: 'avocado',
-      price: 129,
-      category: 'vegetable',
-      userId: 1
-    }),
-    Groceryitem.create({
-      name: 'garlic',
-      price: 49,
-      category: 'vegetable',
-      userId: 1
-    }),
-    Groceryitem.create({
-      name: 'arugula',
-      price: 249,
-      category: 'vegetable',
-      userId: 1
-    }),
-    Groceryitem.create({
-      name: 'cucumber',
-      price: 199,
-      category: 'vegetable'
-    }),
-    Groceryitem.create({
-      name: 'mushroom',
-      price: 229,
-      category: 'vegetable'
-    }),
-    Groceryitem.create({
-      name: 'broccoli',
-      price: 349,
-      category: 'vegetable'
-    }),
-    Groceryitem.create({
-      name: 'tomato',
-      price: 269,
-      category: 'vegetable'
-    }),
-    Groceryitem.create({
-      name: 'zucchini',
-      price: 79,
-      category: 'vegetable'
-    }),
-    Groceryitem.create({
-      name: 'corn',
-      price: 39,
-      category: 'vegetable'
-    }),
-    Groceryitem.create({
-      name: 'lime',
-      price: 29,
-      category: 'fruit'
-    }),
-    Groceryitem.create({
-      name: 'blackberry',
-      price: 599,
-      category: 'fruit'
-    }),
-    Groceryitem.create({
-      name: 'apple',
-      price: 69,
-      category: 'fruit'
-    }),
-    Groceryitem.create({
-      name: 'salmon',
-      price: 969,
-      category: 'seafood'
-    }),
-    Groceryitem.create({
-      name: 'chicken',
-      price: 9,
-      category: 'meat'
-    }),
-    Groceryitem.create({
-      name: 'sourdough bread',
-      price: 299,
-      category: 'grain'
+    OrderedItems.create({
+      quantity: 4,
+      price: 728
     })
   ])
 
-  const recipes = await Promise.all([
+  const orders = await Promise.all([
+    Order.create({
+      isActive: true
+    }),
+    Order.create({
+      isActive: true
+    })
+  ])
+
+  const items = await Promise.all(
+    itemsJson.map(item => Groceryitem.create(item))
+  )
+
+  const [user1, user2] = users
+  const [order1, order2] = orders
+  const [item1, item2] = items
+  const [orderedItems1, orderedItems2] = orderedItems
+
+  await user1.addOrders(order1)
+  await user2.addOrders(order2)
+
+  await orderedItems1.setGroceryitem(item1)
+  await orderedItems2.setGroceryitem(item2)
+
+  await orderedItems1.setOrder(order1)
+  await orderedItems2.setOrder(order2)
+
+  await Promise.all([
     Recipe.create({
       name: 'banana yogurt cake',
       content:
@@ -142,7 +90,7 @@ async function seed() {
     })
   ])
 
-  const menus = await Promise.all([
+  await Promise.all([
     Menu.create({
       name: 'avocado toast',
       category: 'breakfast'
@@ -152,11 +100,6 @@ async function seed() {
       category: 'lunch'
     })
   ])
-
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${groceryitems.length} groceryitems`)
-  console.log(`seeded ${recipes.length} groceryitemsInOrders`)
-  console.log(`seeded ${menus.length} orders`)
 
   console.log(`seeded successfully`)
 }

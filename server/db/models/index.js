@@ -1,5 +1,8 @@
 const User = require('./user')
 const Groceryitem = require('./groceryitem')
+const Order = require('./order')
+const OrderedItems = require('./orderedItems')
+
 const Recipe = require('./recipe')
 const Menu = require('./menu')
 
@@ -10,17 +13,25 @@ const Menu = require('./menu')
  *    BlogPost.belongsTo(User)
  */
 
-// user - groceryItem
-User.hasMany(Groceryitem)
-Groceryitem.belongsTo(User)
+//order - ordered items
+OrderedItems.belongsTo(Order)
+Order.hasMany(OrderedItems)
+
+//grocery item - ordered items
+OrderedItems.belongsTo(Groceryitem)
+Groceryitem.hasMany(OrderedItems)
+
+// user - order
+Order.belongsTo(User) // UserIdㄱㅏ Order 모델에 생김
+User.hasMany(Order) // UserId가 Order에 생김
 
 // user - recipe
-User.hasMany(Recipe)
 Recipe.belongsTo(User)
+User.hasMany(Recipe)
 
 // user - menu
-User.hasMany(Menu)
 Menu.belongsTo(User)
+User.hasMany(Menu)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -31,6 +42,8 @@ Menu.belongsTo(User)
 module.exports = {
   User,
   Groceryitem,
+  Order,
+  OrderedItems,
   Recipe,
   Menu
 }
