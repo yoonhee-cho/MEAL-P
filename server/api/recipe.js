@@ -1,10 +1,12 @@
 const router = require('express').Router()
 const {Recipe} = require('../db/models')
+const isUser = require('../auth/userMiddleware')
 module.exports = router
 
 // authentication
 function isAuthenticated(req, res, next) {
-  if (req.user.id) {
+  if (req.user) {
+    console.log('req.user', req.user)
     return next()
   } else {
     res.status(403).end()
@@ -12,8 +14,10 @@ function isAuthenticated(req, res, next) {
 }
 
 // GET /api/recipe
+//[TODO] : isAuthenticated , isUser middleware is not working idk why
 router.get('/', isAuthenticated, async (req, res, next) => {
   try {
+    console.log('req.user', req.user)
     // this finds all recipes by user
     const recipes = await Recipe.findAll({
       // where: {userId: req.user.id},

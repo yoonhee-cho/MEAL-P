@@ -1,7 +1,7 @@
 const User = require('./user')
 const Groceryitem = require('./groceryitem')
 const Order = require('./order')
-const OrderedItems = require('./orderedItems')
+const OrderedItem = require('./orderedItem')
 
 const Recipe = require('./recipe')
 const Menu = require('./menu')
@@ -14,12 +14,12 @@ const Menu = require('./menu')
  */
 
 //order - ordered items
-OrderedItems.belongsTo(Order)
-Order.hasMany(OrderedItems)
+OrderedItem.belongsTo(Order)
+Order.hasMany(OrderedItem)
 
 //grocery item - ordered items
-OrderedItems.belongsTo(Groceryitem)
-Groceryitem.hasMany(OrderedItems)
+OrderedItem.belongsTo(Groceryitem)
+Groceryitem.hasMany(OrderedItem)
 
 // user - order
 Order.belongsTo(User) // UserIdㄱㅏ Order 모델에 생김
@@ -43,7 +43,7 @@ module.exports = {
   User,
   Groceryitem,
   Order,
-  OrderedItems,
+  OrderedItem,
   Recipe,
   Menu
 }

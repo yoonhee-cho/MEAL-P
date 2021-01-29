@@ -5,7 +5,7 @@ const {
   User,
   Groceryitem,
   Order,
-  OrderedItems,
+  OrderedItem,
   Recipe,
   Menu
 } = require('../server/db/models')
@@ -38,11 +38,11 @@ async function seed() {
   ])
 
   const orderedItems = await Promise.all([
-    OrderedItems.create({
+    OrderedItem.create({
       quantity: 2,
       price: 10
     }),
-    OrderedItems.create({
+    OrderedItem.create({
       quantity: 4,
       price: 728
     })
