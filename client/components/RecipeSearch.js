@@ -3,7 +3,7 @@ import Form from './Form'
 import Recipes from './Recipes'
 import {Grid} from '@material-ui/core'
 
-const API_KEY = ''
+// const API_KEY = ''
 
 class RecipeSearch extends Component {
   state = {
@@ -13,7 +13,6 @@ class RecipeSearch extends Component {
   getRecipe = async e => {
     e.preventDefault()
     const recipeName = e.target.elements.recipeName.value
-    console.log('this.state.recipes', this.state.recipes)
 
     const apiCall = await fetch(
       `https://cors-anywhere.herokuapp.com/https://recipesapi.herokuapp.com/api/search?q=${recipeName}&page=3`

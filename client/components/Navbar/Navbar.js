@@ -38,7 +38,7 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => {
             </Link>
           </li>
           <li>
-            <Link className="nav-links" to={'/weeklyprices/' + userId}>
+            <Link className="nav-links" to={'/mealplan/' + userId}>
               Meal Plan
             </Link>
           </li>

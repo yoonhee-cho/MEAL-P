@@ -111,24 +111,21 @@ router.put('/:userId/:ordereditemId', async (req, res, next) => {
 
 //DELETE /:userId/:cardId/:ordereditemId
 //remove items from user cart
-router.delete(
-  '/:userId/:orderId/:ordereditemId',
-  isUser,
-  async (req, res, next) => {
-    try {
-      let orderItems = await OrderedItem.findByPk(req.params.ordereditemId)
-      await orderItems.destroy()
-      await orderItems.save()
+//[TODO] add isUser middleware
+router.delete('/:userId/:orderId/:ordereditemId', async (req, res, next) => {
+  try {
+    let orderItems = await OrderedItem.findByPk(req.params.ordereditemId)
+    await orderItems.destroy()
+    await orderItems.save()
 
-      let order = await Order.findByPk(req.params.orderId, {
-        include: {
-          model: OrderedItem,
-          include: [Groceryitem]
-        }
-      })
-      res.json(order)
-    } catch (err) {
-      next(err)
-    }
+    let order = await Order.findByPk(req.params.orderId, {
+      include: {
+        model: OrderedItem,
+        include: [Groceryitem]
+      }
+    })
+    res.json(order)
+  } catch (err) {
+    next(err)
   }
-)
+})

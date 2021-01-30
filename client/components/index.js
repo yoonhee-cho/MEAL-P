@@ -18,9 +18,6 @@ export {default as Form} from './Form'
 export {default as RecipeCard} from './RecipeCard'
 
 // ========== MEAL PLAN ==========
+export {default as MealPlan} from './Mealplan'
 
 // ========== MY RECIPE STORAGE ==========
-
-// ========== WEEKLY PRICES ==========
-export {default as WeeklypriceCard} from './weeklypriceCard'
-export {default as AddWeeklyprices} from './addWeeklyprices'
