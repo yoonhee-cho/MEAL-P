@@ -129,3 +129,19 @@ router.delete('/:userId/:orderId/:ordereditemId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:userId/:cartId/purchase', async (req, res, next) => {
+  try {
+    let cartId = req.params.cartId
+    let currentCart = await Order.findByPk(cartId, {
+      include: {
+        model: OrderedItem,
+        include: [Groceryitem]
+      }
+    })
+    await currentCart.update(req.body)
+    await currentCart.save()
+  } catch (err) {
+    next(err)
+  }
+})

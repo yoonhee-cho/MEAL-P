@@ -24,8 +24,19 @@ class Mealplan extends React.Component {
               <option>🍯 Sauce / 🧂 Spice</option>
               <option>💫 etc</option>
             </select>
-            <input className="quantity" type="number" min="1" />
-            <button type="submit">add</button>
+            <select label="Quantity: ">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+            {/* <input className="quantity" type="number" min="1" /> */}
+            <button
+              type="button"
+              onClick={event => this.handleAddToCart(event, item)}
+            >
+              add
+            </button>
           </form>
         </div>
         <div className="shopping-list">
