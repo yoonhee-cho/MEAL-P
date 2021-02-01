@@ -1,13 +1,19 @@
-import {NextWeek} from '@material-ui/icons'
 import axios from 'axios'
 
 //action type
+const ADD_TO_CART = 'ADD_TO_CART'
 const SET_CART_ITEMS = 'SET_CART_ITEMS'
-const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
-const REMOVE_ITEMS = 'REMOVE_ITEMS'
-const PURCHASE = 'PURCHASE'
+const UPDATE_ITEM = 'UPDATE_ITEM'
+const REMOVE_ITEM = 'REMOVE_ITEM'
 
 //action creator
+
+export const addToCart = item => {
+  return {
+    type: ADD_TO_CART,
+    item: item
+  }
+}
 
 export const setCartItems = items => {
   return {
@@ -16,28 +22,31 @@ export const setCartItems = items => {
   }
 }
 
-export const changeQuantity = items => {
+export const updateItem = item => {
   return {
-    type: CHANGE_QUANTITY,
-    items: items
+    type: UPDATE_ITEM,
+    items: item
   }
 }
 
-export const removeItems = items => {
+export const removeItem = itemId => {
   return {
-    type: REMOVE_ITEMS,
-    items: items
+    type: REMOVE_ITEM,
+    itemId: itemId
   }
 }
 
-export const purchase = items => {
-  return {
-    type: PURCHASE,
-    items: items
+export const addItemToCart = (itemObj, userId) => {
+  return async dispatch => {
+    try {
+      const res = await axios.post(`/api/users/${userId}/cart`, itemObj)
+      dispatch(addToCart(res.data))
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
-// thunk to get all of the user cart items
 export const fetchCartItems = userId => {
   return async dispatch => {
     try {
@@ -58,7 +67,7 @@ export const updateQuantity = (orderedItemId, newQuantity, userId) => {
         `/api/users/${userId}/${orderedItemId}`,
         {quantity: newQuantity}
       )
-      dispatch(changeQuantity(response.data))
+      dispatch(updateItem(response.data))
     } catch (err) {
       alert('something wrong with updateQuantity thunk')
       console.log(err)
@@ -73,7 +82,7 @@ export const deleteItems = (cartId, orderedItemId, userId) => {
       const response = await axios.delete(
         `/api/users/${userId}/${cartId}/${orderedItemId}`
       )
-      dispatch(removeItems(response.data))
+      dispatch(removeItem(response.data))
     } catch (err) {
       alert('something wrong with deleteItems thunk in store/cart.js')
       console.log(err)
@@ -82,31 +91,46 @@ export const deleteItems = (cartId, orderedItemId, userId) => {
 }
 
 //thunk to purchase
-export const makePurchase = (cartId, userId) => {
-  return async dispatch => {
-    try {
-      const response = await axios.put(
-        `/api/users/${userId}/${cartId}/purchase`,
-        {isActive: false}
-      )
-      dispatch(purchase(response.data))
-    } catch (err) {
-      alert('something wrong with purchase thunk in store/cart.js')
-      console.log(err)
-    }
-  }
-}
+// export const makePurchase = (cartId, userId) => {
+//   return async dispatch => {
+//     try {
+//       const response = await axios.put(
+//         `/api/users/${userId}/${cartId}/purchase`,
+//         {isActive: false}
+//       )
+//       dispatch(purchase(response.data))
+//     } catch (err) {
+//       alert('something wrong with purchase thunk in store/cart.js')
+//       console.log(err)
+//     }
+//   }
+// }
+const initialState = []
 
 //reducers, which gets sent to store.js to be combined
-export default function cartReducer(state = {orderedItems: []}, action) {
+export default function cartReducer(state = initialState, action) {
   // eslint-disable-next-line default-case
   switch (action.type) {
+    case ADD_TO_CART:
+      return [...state, action.item]
+
     case SET_CART_ITEMS:
       return action.items
-    case CHANGE_QUANTITY:
-      return {
-        ...state,
-        orderedItems: [...action.items.orderedItems]
-      }
+
+    case UPDATE_ITEM:
+      return state.map(item => {
+        if (item.id === action.item.itemId) {
+          item.quantity = action.item.quantity
+        }
+        return item
+      })
+
+    case REMOVE_ITEM:
+      return state.filter(item => {
+        if (item.id !== action.itemId) return item
+      })
+
+    default:
+      return state
   }
 }

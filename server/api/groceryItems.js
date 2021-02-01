@@ -12,6 +12,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:groceryItemId', async (req, res, next) => {
+  try {
+    const groceryItem = await Groceryitem.findByPk(req.params.groceryItemId)
+    res.json(groceryItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //admin creates new item api route
 //[TODO] : add isAdmin middleware
 router.post('/', async (req, res, next) => {

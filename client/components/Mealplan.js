@@ -1,8 +1,39 @@
 import React from 'react'
-import Button from './Button'
+import {connect} from 'react-redux'
+import {fetchItems} from '../store/item'
+import {addItemToCart, fetchCartItems} from '../store/cart'
 
 class Mealplan extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      searchTerm: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleAddToCart = this.handleAddToCart(this)
+  }
+
+  async componentDidMount() {
+    await this.props.getItemsInReact()
+  }
+
+  handleChange(event) {
+    this.setState({searchTerm: event.target.value})
+  }
+
+  handleAddToCart(event) {}
+
   render() {
+    const itemsArr = this.props.itemsInReact
+    const itemHello =
+      itemsArr &&
+      itemsArr.filter(item => {
+        return item.name.toLowerCase() === this.state.searchTerm.toLowerCase()
+      })
+
+    console.log('item???', itemHello)
+
     return (
       <>
         <div className="add-to-list">
@@ -11,40 +42,60 @@ class Mealplan extends React.Component {
               type="ingredeint-add"
               className="text-input"
               placeholder="+ Add new Item"
+              value={this.state.sea}
+              onChange={this.handleChange}
             />
-            <select className="catecory-select">
-              <option>-Select-</option>
-              <option>🥦 Veggies</option>
-              <option>🥩 Meat</option>
-              <option>🐟 Fish</option>
-              <option>🥛 Dairy</option>
-              <option>🍓 Fruit</option>
-              <option>🥖 Bakery</option>
-              <option>🍰 Dessert</option>
-              <option>🍯 Sauce / 🧂 Spice</option>
-              <option>💫 etc</option>
-            </select>
+
             <select label="Quantity: ">
               <option>1</option>
               <option>2</option>
               <option>3</option>
               <option>4</option>
             </select>
-            {/* <input className="quantity" type="number" min="1" /> */}
-            <button
-              type="button"
-              onClick={event => this.handleAddToCart(event, item)}
-            >
+
+            <button type="submit" onClick={this.handleAddToCart}>
               add
             </button>
           </form>
         </div>
+
         <div className="shopping-list">
-          <li>blueberry</li>
+          <div>
+            {itemsArr &&
+              itemsArr
+                .filter(item => {
+                  return (
+                    item.name.toLowerCase() ===
+                    this.state.searchTerm.toLowerCase()
+                  )
+                })
+                .map(item => {
+                  return (
+                    <div key={item.id}>
+                      {item.name} {item.price} {item.category}
+                    </div>
+                  )
+                })}
+          </div>
         </div>
       </>
     )
   }
 }
 
-export default Mealplan
+const mapStateToProps = state => {
+  return {
+    itemsInReact: state.items,
+    userInReact: state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getItemsInReact: () => dispatch(fetchItems()),
+    addItemToCart: item => dispatch(addItemToCart(item)),
+    setCartItems: userId => dispatch(fetchCartItems(userId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mealplan)
