@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchItems} from '../store/item'
-import {addItemToCart, fetchCartItems} from '../store/cart'
+import {add} from '../store/user'
+import {fetchCartItems} from '../store/cart'
 
 class Mealplan extends React.Component {
   constructor(props) {
@@ -16,23 +17,34 @@ class Mealplan extends React.Component {
 
   async componentDidMount() {
     await this.props.getItemsInReact()
+    await this.props.fetchCartItemsInReact(this.props.userInReact.id)
   }
 
   handleChange(event) {
     this.setState({searchTerm: event.target.value})
   }
 
-  handleAddToCart(event) {}
-
-  render() {
+  handleAddToCart(event) {
     const itemsArr = this.props.itemsInReact
-    const itemHello =
+
+    const itemToAdd =
       itemsArr &&
       itemsArr.filter(item => {
         return item.name.toLowerCase() === this.state.searchTerm.toLowerCase()
       })
 
-    console.log('item???', itemHello)
+    console.log(itemToAdd, 'itemToAdd')
+  }
+
+  render() {
+    // const itemsArr = this.props.itemsInReact
+    // const itemToAdd =
+    //   itemsArr &&
+    //   itemsArr.filter(item => {
+    //     return item.name.toLowerCase() === this.state.searchTerm.toLowerCase()
+    //   })
+
+    // console.log('item???', itemToAdd)
 
     return (
       <>
@@ -61,21 +73,10 @@ class Mealplan extends React.Component {
 
         <div className="shopping-list">
           <div>
-            {itemsArr &&
-              itemsArr
-                .filter(item => {
-                  return (
-                    item.name.toLowerCase() ===
-                    this.state.searchTerm.toLowerCase()
-                  )
-                })
-                .map(item => {
-                  return (
-                    <div key={item.id}>
-                      {item.name} {item.price} {item.category}
-                    </div>
-                  )
-                })}
+            {/* {itemToAdd.map(item => {
+              return item.name
+            })
+            } */}
           </div>
         </div>
       </>
@@ -93,8 +94,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getItemsInReact: () => dispatch(fetchItems()),
-    addItemToCart: item => dispatch(addItemToCart(item)),
-    setCartItems: userId => dispatch(fetchCartItems(userId))
+    addItemToCartInReact: (userId, itemId) => dispatch(add(userId, itemId)),
+    fetchCartItemsInReact: userId => dispatch(fetchCartItems(userId))
   }
 }
 
