@@ -13,17 +13,17 @@ export const setCartItems = items => {
   }
 }
 
-export const changeItemQty = item => {
+export const changeItemQty = items => {
   return {
     type: CHANGE_ITEM_QTY,
-    item: item
+    items: items
   }
 }
 
-export const removeItem = itemId => {
+export const removeItem = items => {
   return {
     type: REMOVE_ITEM,
-    itemId: itemId
+    items: items
   }
 }
 
@@ -82,27 +82,25 @@ export const deleteItems = (userId, cartId, orderedItemId) => {
 //     }
 //   }
 // }
-const initialState = []
 
 //reducers, which gets sent to store.js to be combined
-export default function cartReducer(state = initialState, action) {
+export default function cartReducer(state = {orderedItems: []}, action) {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case SET_CART_ITEMS:
       return action.items
 
     case CHANGE_ITEM_QTY:
-      return state.map(item => {
-        if (item.id === action.item.itemId) {
-          item.quantity = action.item.quantity
-        }
-        return item
-      })
+      return {
+        ...state,
+        orderedItems: [...action.items]
+      }
 
     case REMOVE_ITEM:
-      return state.filter(item => {
-        if (item.id !== action.itemId) return item
-      })
+      return {
+        ...state,
+        orderedItems: [...action.items]
+      }
 
     default:
       return state

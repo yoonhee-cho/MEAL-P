@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchItems} from '../store/item'
 import {add} from '../store/user'
 import {fetchCartItems} from '../store/cart'
+import ItemCard from './ItemCard'
 
 class Mealplan extends React.Component {
   constructor(props) {
@@ -24,27 +25,10 @@ class Mealplan extends React.Component {
     this.setState({searchTerm: event.target.value})
   }
 
-  handleAddToCart(event) {
-    const itemsArr = this.props.itemsInReact
-
-    const itemToAdd =
-      itemsArr &&
-      itemsArr.filter(item => {
-        return item.name.toLowerCase() === this.state.searchTerm.toLowerCase()
-      })
-
-    console.log(itemToAdd, 'itemToAdd')
-  }
+  handleAddToCart() {}
 
   render() {
-    // const itemsArr = this.props.itemsInReact
-    // const itemToAdd =
-    //   itemsArr &&
-    //   itemsArr.filter(item => {
-    //     return item.name.toLowerCase() === this.state.searchTerm.toLowerCase()
-    //   })
-
-    // console.log('item???', itemToAdd)
+    const itemsArr = this.props.itemsInReact
 
     return (
       <>
@@ -53,30 +37,34 @@ class Mealplan extends React.Component {
             <input
               type="ingredeint-add"
               className="text-input"
-              placeholder="+ Add new Item"
-              value={this.state.sea}
+              placeholder="+ Search grocery item to add"
+              value={this.state.searchTerm}
               onChange={this.handleChange}
             />
-
-            <select label="Quantity: ">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
-
-            <button type="submit" onClick={this.handleAddToCart}>
-              add
-            </button>
           </form>
         </div>
 
         <div className="shopping-list">
           <div>
-            {/* {itemToAdd.map(item => {
-              return item.name
-            })
-            } */}
+            {itemsArr &&
+              itemsArr
+                .filter(item => {
+                  return (
+                    item.name.toLowerCase() ===
+                    this.state.searchTerm.toLowerCase()
+                  )
+                })
+                .map(item => {
+                  return (
+                    <ItemCard
+                      key={item.id}
+                      userId={this.props.userInReact.id}
+                      itemName={item.name}
+                      itemPrice={item.price}
+                      handleAddToCart={this.handleAddToCart}
+                    />
+                  )
+                })}
           </div>
         </div>
       </>
