@@ -37,36 +37,28 @@ router.get('/:userId/cart', async (req, res, next) => {
   }
 })
 
-//PUT (CREATE OR REPLACE) api/users/:userId/:groceryItemId/add
+//PUT (CREATE OR REPLACE) api/users/:userId/cart
 // add item to user cart
 //[TODO] : add isUser middleware later
-router.put('/:userId/:groceryItemId/add', async (req, res, next) => {
+router.post('/:userId/cart', async (req, res, next) => {
   try {
     let userId = req.params.userId
-    let itemId = req.params.groceryItemId
-
-    //디비에서 현재 유저를 찾아
-    const currentUser = await User.findByPk(userId, {
-      include: [Order]
-    })
+    let itemId = req.body.id
 
     //디비에서 현재유저의 오더를 찾아, 오더한아이템리스트 포함해서
-    let currentOrder = await Order.findOrCreate({
+    let orderId = await Order.findOrCreate({
       where: {
         userId: userId,
         isActive: true
       },
-      include: [OrderedItem]
+      attributes: ['id']
     })
-
-    //현재아이템(추가할아이템)을 디비에서 찾아
-    let currentItem = await Groceryitem.findByPk(itemId)
 
     //현재오더아이템을 디비에서 찾아
     let currentOrderItem = await OrderedItem.findOne({
       where: {
         groceryitemId: itemId,
-        orderId: currentOrder[0].dataValues.id
+        orderId: orderId[0].id
       }
     })
 
@@ -77,13 +69,14 @@ router.put('/:userId/:groceryItemId/add', async (req, res, next) => {
         subTotal: newQty * currentOrderItem.price
       })
     } else {
-      OrderedItem.create({
-        price: currentItem.price,
-        orderId: currentOrder[0].dataValues.id,
+      const newItemInCart = await OrderedItem.create({
+        price: currentOrderItem.price,
+        orderId: orderId[0].id,
         groceryitemId: itemId
       })
+      await newItemInCart.save()
+      res.send(newItemInCart)
     }
-    res.json(currentUser)
   } catch (err) {
     next(err)
   }

@@ -1,21 +1,23 @@
 import axios from 'axios'
 
 //action type
-const SET_CART_ITEMS = 'SET_CART_ITEMS'
-const CHANGE_ITEM_QTY = 'CHANGE_ITEM_QTY'
+const SET_CART = 'SET_CART'
+const ADD_ITEM = 'ADD_ITEM'
+const UPDATE_CART = 'UPDATE_CART'
+
 const REMOVE_ITEM = 'REMOVE_ITEM'
 
 //action creator
-export const setCartItems = items => {
+export const setCart = cart => {
   return {
-    type: SET_CART_ITEMS,
-    items: items
+    type: SET_CART,
+    cart: cart
   }
 }
 
-export const changeItemQty = items => {
+export const updateCart = items => {
   return {
-    type: CHANGE_ITEM_QTY,
+    type: UPDATE_CART,
     items: items
   }
 }
@@ -31,36 +33,42 @@ export const fetchCartItems = userId => {
   return async dispatch => {
     try {
       const response = await axios.get(`/api/users/${userId}/cart`)
-      dispatch(setCartItems(response.data))
+      dispatch(setCart(response.data))
     } catch (err) {
       console.log(err)
     }
   }
 }
 
-//thunk to update item qty
-export const updateQuantity = (orderedItemId, newQuantity, userId) => {
+export const addItemToCart = (itemObj, userId) => {
   return async dispatch => {
     try {
-      const response = await axios.put(
-        `/api/users/${userId}/${orderedItemId}`,
-        {quantity: newQuantity}
-      )
-      dispatch(changeItemQty(response.data))
-    } catch (err) {
-      console.log(err)
+      await axios.post(`/api/users/${userId}/cart`, itemObj)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const updateItem = (item, userId) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/users/${userId}/cart`, item)
+      const response = await axios.get(`/api/users/${userId}/cart`)
+      dispatch(updateCart(response.data))
+    } catch (error) {
+      console.log(error)
     }
   }
 }
 
 //thunk to remove item from cart
-export const deleteItems = (userId, cartId, orderedItemId) => {
+export const deleteItem = (userId, itemObj) => {
   return async dispatch => {
     try {
-      const response = await axios.delete(
-        `/api/users/${userId}/${cartId}/${orderedItemId}`
-      )
-      dispatch(removeItem(response.data))
+      await axios.delete(`/api/users/${userId}/cart`, {data: itemObj})
+      const {data} = await axios.get(`/api/users/${userId}/cart`)
+      dispatch(setCart(data))
     } catch (err) {
       console.log(err)
     }
@@ -83,24 +91,20 @@ export const deleteItems = (userId, cartId, orderedItemId) => {
 //   }
 // }
 
+const initialState = []
+
 //reducers, which gets sent to store.js to be combined
-export default function cartReducer(state = {orderedItems: []}, action) {
+export default function cartReducer(state = initialState, action) {
   // eslint-disable-next-line default-case
   switch (action.type) {
-    case SET_CART_ITEMS:
+    case SET_CART:
+      return action.cart
+
+    case ADD_ITEM:
+      return [...state, action.item]
+
+    case UPDATE_CART:
       return action.items
-
-    case CHANGE_ITEM_QTY:
-      return {
-        ...state,
-        orderedItems: [...action.items]
-      }
-
-    case REMOVE_ITEM:
-      return {
-        ...state,
-        orderedItems: [...action.items]
-      }
 
     default:
       return state

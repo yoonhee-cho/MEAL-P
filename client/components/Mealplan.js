@@ -1,9 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchItems} from '../store/item'
-import {add} from '../store/user'
-import {fetchCartItems} from '../store/cart'
-import ItemCard from './ItemCard'
+import AddToCart from './AddToCart'
 
 class Mealplan extends React.Component {
   constructor(props) {
@@ -13,19 +11,15 @@ class Mealplan extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleAddToCart = this.handleAddToCart(this)
   }
 
   async componentDidMount() {
     await this.props.getItemsInReact()
-    await this.props.fetchCartItemsInReact(this.props.userInReact.id)
   }
 
   handleChange(event) {
     this.setState({searchTerm: event.target.value})
   }
-
-  handleAddToCart() {}
 
   render() {
     const itemsArr = this.props.itemsInReact
@@ -56,13 +50,11 @@ class Mealplan extends React.Component {
                 })
                 .map(item => {
                   return (
-                    <ItemCard
-                      key={item.id}
-                      userId={this.props.userInReact.id}
-                      itemName={item.name}
-                      itemPrice={item.price}
-                      handleAddToCart={this.handleAddToCart}
-                    />
+                    <div key={item.id} className="item-preview-text">
+                      <h3>{item.name}</h3>
+                      <h3>{item.price}</h3>
+                      <AddToCart item={item} />
+                    </div>
                   )
                 })}
           </div>
@@ -81,9 +73,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getItemsInReact: () => dispatch(fetchItems()),
-    addItemToCartInReact: (userId, itemId) => dispatch(add(userId, itemId)),
-    fetchCartItemsInReact: userId => dispatch(fetchCartItems(userId))
+    getItemsInReact: () => dispatch(fetchItems())
   }
 }
 
