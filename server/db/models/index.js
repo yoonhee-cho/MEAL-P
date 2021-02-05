@@ -25,13 +25,14 @@ Groceryitem.hasMany(OrderedItem)
 Order.belongsTo(User) // UserIdㄱㅏ Order 모델에 생김
 User.hasMany(Order) // UserId가 Order에 생김
 
-// user - recipe
-Recipe.belongsTo(User)
-User.hasMany(Recipe)
-
+// 나중에해야할데이터베이스
 // user - menu
 Menu.belongsTo(User)
 User.hasMany(Menu)
+
+// user - recipe
+Recipe.belongsTo(User)
+User.hasMany(Recipe)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

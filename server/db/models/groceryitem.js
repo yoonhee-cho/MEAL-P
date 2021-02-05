@@ -9,11 +9,7 @@ const Groceryitem = db.define('groceryitem', {
   // price will be pennies and converted on the frontend
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    get: function() {
-      let pennies = this.getDataValue('price')
-      return pennies / 100
-    }
+    allowNull: false
   },
   category: {
     type: Sequelize.ENUM(

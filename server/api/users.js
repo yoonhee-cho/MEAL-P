@@ -21,31 +21,82 @@ router.get('/', isAdmin, async (req, res, next) => {
 router.get('/:userId/cart', async (req, res, next) => {
   try {
     let userId = req.params.userId
-    const currentCart = await Order.findOne({
+
+    const orderIdFromOrders = await Order.findAll({
       where: {
         userId: userId,
         isActive: true
       },
-      include: {
-        model: OrderedItem,
-        include: [Groceryitem]
-      }
+      attributes: ['id']
     })
-    res.json(currentCart)
+
+    if (orderIdFromOrders.length > 0) {
+      const findItemsIdInCart = await OrderedItem.findAll({
+        where: {
+          orderId: orderIdFromOrders[0].id
+        },
+        attributes: ['groceryitemId']
+      })
+
+      // findItemsIdInCart = [{"groceryitemId": 2}]
+      const getItems = async () => {
+        return Promise.all(
+          findItemsIdInCart.map(async item => {
+            const itemId = item.groceryitemId
+            const itemGetter = await Groceryitem.findOne({
+              where: {
+                id: itemId
+              },
+
+              include: [
+                {
+                  model: OrderedItem,
+                  where: {
+                    orderId: orderIdFromOrders[0].id
+                  },
+                  attributes: ['groceryitemId', 'quantity', 'subTotal']
+                }
+              ]
+            })
+            return itemGetter
+          })
+        )
+      }
+      getItems().then(data => {
+        res.json(data)
+      })
+    } else {
+      res.json([])
+    }
   } catch (err) {
     next(err)
   }
 })
 
-//PUT (CREATE OR REPLACE) api/users/:userId/cart
+router.get('/:userId/completed', async (req, res, next) => {
+  try {
+    let userId = req.params.userId
+
+    const completedOrders = await Order.findAll({
+      where: {
+        userId: userId,
+        isActive: false
+      }
+    })
+
+    await res.send(completedOrders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // add item to user cart
 //[TODO] : add isUser middleware later
 router.post('/:userId/cart', async (req, res, next) => {
   try {
-    let userId = req.params.userId
     let itemId = req.body.id
+    let userId = req.params.userId
 
-    //디비에서 현재유저의 오더를 찾아, 오더한아이템리스트 포함해서
     let orderId = await Order.findOrCreate({
       where: {
         userId: userId,
@@ -54,86 +105,120 @@ router.post('/:userId/cart', async (req, res, next) => {
       attributes: ['id']
     })
 
-    //현재오더아이템을 디비에서 찾아
-    let currentOrderItem = await OrderedItem.findOne({
+    let itemAlreadyInOrder = await OrderedItem.findOne({
       where: {
         groceryitemId: itemId,
         orderId: orderId[0].id
       }
     })
 
-    if (currentOrderItem) {
-      let newQty = currentOrderItem.quantity + 1
-      await currentOrderItem.update({
-        quantity: newQty,
-        subTotal: newQty * currentOrderItem.price
-      })
+    if (itemAlreadyInOrder) {
+      res.status(500).send('This item is already in your cart')
     } else {
       const newItemInCart = await OrderedItem.create({
-        price: currentOrderItem.price,
         orderId: orderId[0].id,
         groceryitemId: itemId
       })
+
+      newItemInCart.subTotal = req.body.price
       await newItemInCart.save()
       res.send(newItemInCart)
     }
   } catch (err) {
+    console.log('is somethingwrong??')
     next(err)
   }
 })
 
-//PUT /users/:userId/:ordereditemId
+router.post('/:userId/completed', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+
+    const order = await Order.findOne({
+      where: {
+        userId: userId,
+        isActive: true
+      }
+    })
+
+    order.isActive = false
+
+    await order.save()
+    await res.status(201).end()
+  } catch (error) {
+    console.log(error)
+  }
+})
+//PUT /users/:userId/cart
 //change qty of items in user cart
 //[TODO] : add isUser middleware later
-router.put('/:userId/:ordereditemId', async (req, res, next) => {
+router.put('/:userId/cart', async (req, res, next) => {
   try {
-    let ordereditem = await OrderedItem.findByPk(req.params.ordereditemId)
-    await ordereditem.update(req.body)
-    await ordereditem.save()
-    let updatedOrder = await Order.findByPk(ordereditem.orderId, {
-      include: {
-        model: OrderedItem,
-        include: [Groceryitem]
+    const ordereditemId = req.body.id
+    const userId = req.params.userId
+
+    const orderIdObj = await Order.findOne({
+      where: {
+        userId: userId,
+        isActive: true
+      },
+      attributes: ['id']
+    })
+
+    const quantityInCart = req.body.orderedItems[0].quantity
+
+    const itemInOrder = await OrderedItem.findOne({
+      where: {
+        groceryitemId: ordereditemId,
+        orderId: orderIdObj.id
       }
     })
-    res.json(updatedOrder)
+
+    const subTotal = req.body.price * quantityInCart
+
+    itemInOrder.quantity = quantityInCart
+    await itemInOrder.save()
+
+    itemInOrder.subTotal = subTotal
+    await itemInOrder.save()
+
+    await res.status(201).end()
   } catch (err) {
     next(err)
   }
 })
 
-//DELETE /:userId/:cardId/:ordereditemId
 //remove items from user cart
 //[TODO] add isUser middleware
-router.delete('/:userId/:orderId/:ordereditemId', async (req, res, next) => {
+router.delete('/:userId/cart', async (req, res, next) => {
   try {
-    let orderItems = await OrderedItem.findByPk(req.params.ordereditemId)
-    await orderItems.destroy()
-    await orderItems.save()
+    const userId = req.params.userId
+    const itemIdToDelete = req.body.id
 
-    let order = await Order.findByPk(req.params.orderId, {
-      include: {
-        model: OrderedItem,
-        include: [Groceryitem]
-      }
-    })
-    res.json(order)
-  } catch (err) {
-    next(err)
-  }
-})
+    if (!req.body.id) {
+      const orderIdToDelete = await Order.findOne({
+        where: {
+          userId: userId,
+          isActive: true
+        },
+        attributes: ['id']
+      })
 
-router.put('/:userId/:cartId/purchase', async (req, res, next) => {
-  try {
-    let cartId = req.params.cartId
-    let currentCart = await Order.findByPk(cartId, {
-      include: {
-        model: OrderedItem,
-        include: [Groceryitem]
-      }
-    })
-    await currentCart.update(req.body)
-    await currentCart.save()
+      await OrderedItem.destroy({
+        where: {
+          orderId: orderIdToDelete.id
+        }
+      })
+
+      return res.status(204).end()
+    } else {
+      await OrderedItem.destroy({
+        where: {
+          groceryitemId: itemIdToDelete
+        }
+      })
+      return res.status(204).end()
+    }
   } catch (err) {
     next(err)
   }

@@ -15,6 +15,8 @@ class AddToCart extends React.Component {
 
   async handleClick(event) {
     event.preventDefault()
+    console.log('is item passed?', this.props.item)
+    console.log('is correct user here?', this.props.user.id)
     const userId = this.props.user.id
     const item = this.props.item
     await this.props.addItemToCartInReact(item, userId)
