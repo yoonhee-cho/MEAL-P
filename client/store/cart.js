@@ -50,7 +50,7 @@ export const addItemToCart = (itemObj, userId) => {
   }
 }
 
-export const updateItem = (item, userId) => {
+export const updateItem = (userId, item) => {
   return async dispatch => {
     try {
       await axios.put(`/api/users/${userId}/cart`, item)

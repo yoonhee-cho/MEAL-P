@@ -1,5 +1,6 @@
 import React from 'react'
 import {fetchCartItems, addItemToCart} from '../store/cart'
+import Cart from './Cart'
 import {connect} from 'react-redux'
 
 class AddToCart extends React.Component {
@@ -15,8 +16,6 @@ class AddToCart extends React.Component {
 
   async handleClick(event) {
     event.preventDefault()
-    console.log('is item passed?', this.props.item)
-    console.log('is correct user here?', this.props.user.id)
     const userId = this.props.user.id
     const item = this.props.item
     await this.props.addItemToCartInReact(item, userId)

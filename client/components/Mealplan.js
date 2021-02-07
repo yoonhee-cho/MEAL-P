@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchItems} from '../store/item'
 import AddToCart from './AddToCart'
+import Cart from './Cart'
 
 class Mealplan extends React.Component {
   constructor(props) {
@@ -52,11 +53,15 @@ class Mealplan extends React.Component {
                   return (
                     <div key={item.id} className="item-preview-text">
                       <h3>{item.name}</h3>
-                      <h3>{item.price}</h3>
+                      <h3>{item.price / 100}</h3>
                       <AddToCart item={item} />
                     </div>
                   )
                 })}
+          </div>
+
+          <div>
+            <Cart />
           </div>
         </div>
       </>
