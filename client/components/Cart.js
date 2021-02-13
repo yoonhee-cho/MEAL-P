@@ -45,7 +45,7 @@ export class Cart extends React.Component {
     itemToUpdate[0].quantity = Number(event.target.value)
 
     restItems.push(itemToUpdate)
-    restItems.sort((a, b) => a.groceryitemId - b.groceryitemId)
+    // restItems.sort((a, b) => a.groceryitemId - b.groceryitemId)
 
     this.setState({
       items: restItems
@@ -73,8 +73,8 @@ export class Cart extends React.Component {
   }
 
   render() {
-    const items = this.props.cart
-    console.log('this.props.cart', this.props.cart)
+    const cartItems = this.props.cart
+
     return (
       <div>
         <div>
@@ -82,13 +82,12 @@ export class Cart extends React.Component {
             <h3>Grocery Shopping List</h3>
           </div>
 
-          <div>
-            {items &&
-              items.map(item => {
+          <div className="item-list">
+            {cartItems &&
+              cartItems.map(item => {
                 return (
-                  <div key={item.id}>
+                  <div key={item.id} className="item-container">
                     <div>{item.name}</div>
-                    <div>{item.price / 100}</div>
 
                     <select
                       id={item.id}
@@ -105,7 +104,7 @@ export class Cart extends React.Component {
                       })}
                     </select>
 
-                    <div>subTotal: $ {item.orderedItems[0].subTotal / 100}</div>
+                    <div> $ {item.orderedItems[0].subTotal / 100}</div>
 
                     <div className="remove-button-container">
                       <button
@@ -122,9 +121,9 @@ export class Cart extends React.Component {
           </div>
         </div>
 
-        <div>
+        <div className="total">
           <h3>
-            TOTAL : ${this.props.cart
+            Estimated Price : ${this.props.cart
               .reduce((accum, item) => {
                 accum += item.orderedItems[0].subTotal / 100
                 return accum
@@ -139,7 +138,6 @@ export class Cart extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
     cart: state.cart
   }
 }

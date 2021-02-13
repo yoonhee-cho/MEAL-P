@@ -20,7 +20,6 @@ export {default as RecipeCard} from './RecipeCard'
 // ========== MEAL PLAN ==========
 
 export {default as MealPlan} from './Mealplan'
-export {default as AddToCart} from './AddToCart'
 export {default as Cart} from './Cart'
 
 // ========== MY RECIPE STORAGE ==========

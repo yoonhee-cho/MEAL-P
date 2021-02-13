@@ -1,7 +1,4 @@
 import React from 'react'
-import {fetchCartItems, addItemToCart} from '../store/cart'
-import Cart from './Cart'
-import {connect} from 'react-redux'
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -9,22 +6,18 @@ class AddToCart extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  async componentDidMount() {
-    const userId = this.props.user.id
-    await this.props.getItemsInCartInReact(userId)
-  }
-
-  async handleClick(event) {
+  async handleAddToCart(event) {
     event.preventDefault()
     const userId = this.props.user.id
     const item = this.props.item
-    await this.props.addItemToCartInReact(item, userId)
+    await this.props.addToCart(item, userId)
   }
 
   render() {
+    console.log('is passed?', this.props.addToCart)
     return (
       <div className="add-to-cart">
-        <button type="button" onClick={this.handleClick}>
+        <button type="button" onClick={this.handleAddToCart}>
           ADD TO CART
         </button>
       </div>
@@ -32,19 +25,4 @@ class AddToCart extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-    cart: state.cart
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addItemToCartInReact: (item, userId) =>
-      dispatch(addItemToCart(item, userId)),
-    getItemsInCartInReact: userId => dispatch(fetchCartItems(userId))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddToCart)
+export default AddToCart
