@@ -40,11 +40,13 @@ async function seed() {
   const orderedItems = await Promise.all([
     OrderedItem.create({
       quantity: 2,
-      subTotal: 10
+      subTotal: 10,
+      isSelected: false
     }),
     OrderedItem.create({
       quantity: 4,
-      subTotal: 728
+      subTotal: 728,
+      isSelected: false
     })
   ])
 

@@ -11,6 +11,10 @@ const OrderedItem = db.define('orderedItems', {
   },
   subTotal: {
     type: Sequelize.INTEGER
+  },
+  isSelected: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

@@ -91,7 +91,7 @@ const itemsJson = [
   },
   {
     name: 'chicken',
-    price: 9,
+    price: 900,
     category: 'meat'
   },
   {

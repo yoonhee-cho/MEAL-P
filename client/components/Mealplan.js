@@ -72,14 +72,13 @@ class Mealplan extends React.Component {
                 })
                 .map(item => {
                   return (
-                    <div key={item.id}>
+                    <div className="item-search-result-box" key={item.id}>
                       <div className="item-detail">
-                        <h3>
-                          {item.name}
-                          {item.price / 100}
-                        </h3>
+                        <h3>{item.name}</h3>
+                        <h3>${item.price / 100}/EA</h3>
 
                         <button
+                          className="btn-add-to-list"
                           type="button"
                           onClick={event => this.handleAddToCart(event, item)}
                         >

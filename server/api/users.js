@@ -54,7 +54,12 @@ router.get('/:userId/cart', async (req, res, next) => {
                   where: {
                     orderId: orderIdFromOrders[0].id
                   },
-                  attributes: ['groceryitemId', 'quantity', 'subTotal']
+                  attributes: [
+                    'groceryitemId',
+                    'quantity',
+                    'subTotal',
+                    'isSelected'
+                  ]
                 }
               ]
             })

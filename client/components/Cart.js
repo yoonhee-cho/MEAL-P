@@ -1,6 +1,7 @@
 import React from 'react'
 import {fetchCartItems, updateItem, deleteItem} from '../store/cart'
 import {connect} from 'react-redux'
+import CartItem from './CartItem'
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ export class Cart extends React.Component {
     itemToUpdate[0].quantity = Number(event.target.value)
 
     restItems.push(itemToUpdate)
-    // restItems.sort((a, b) => a.groceryitemId - b.groceryitemId)
+    restItems.sort((a, b) => a.groceryitemId - b.groceryitemId)
 
     this.setState({
       items: restItems
@@ -75,50 +76,91 @@ export class Cart extends React.Component {
   render() {
     const cartItems = this.props.cart
 
+    const vegList = cartItems.filter(item => item.category === 'vegetable')
+    const fruitList = cartItems.filter(item => item.category === 'fruit')
+    const grainList = cartItems.filter(item => item.category === 'grain')
+    const diaryList = cartItems.filter(item => item.category === 'diary')
+    const seafoodList = cartItems.filter(item => item.category === 'seafood')
+    const meatList = cartItems.filter(item => item.category === 'meat')
+    const spiceList = cartItems.filter(item => item.category === 'spice/sauce')
+    const snackList = cartItems.filter(item => item.category === 'snack')
+    const etcList = cartItems.filter(item => item.category === 'etc')
+
     return (
       <div>
-        <div>
-          <div>
-            <h3>Grocery Shopping List</h3>
+        <div className="category-container">
+          <div className="category-div">
+            <h3>🥦 Veggies</h3>
           </div>
-
-          <div className="item-list">
-            {cartItems &&
-              cartItems.map(item => {
-                return (
-                  <div key={item.id} className="item-container">
-                    <div>{item.name}</div>
-
-                    <select
-                      id={item.id}
-                      label="Quantity"
-                      defaultValue={item.orderedItems[0].quantity}
-                      onChange={event => this.handleChange(event, item)}
-                    >
-                      {Array.from(Array(15)).map((el, idx) => {
-                        return (
-                          <option key={idx} value={idx + 1}>
-                            {idx + 1}
-                          </option>
-                        )
-                      })}
-                    </select>
-
-                    <div> $ {item.orderedItems[0].subTotal / 100}</div>
-
-                    <div className="remove-button-container">
-                      <button
-                        type="button"
-                        className="remove-from-cart-button"
-                        onClick={event => this.handleRemove(event, item)}
-                      >
-                        Remove from Cart
-                      </button>
-                    </div>
-                  </div>
-                )
-              })}
+          <CartItem
+            cartItems={vegList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🍓 Fruit</h3>
           </div>
+          <CartItem
+            cartItems={fruitList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🍚 Grain</h3>
+          </div>
+          <CartItem
+            cartItems={grainList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🧀 Diary</h3>
+          </div>
+          <CartItem
+            cartItems={diaryList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🦐 Seafood</h3>
+          </div>
+          <CartItem
+            cartItems={seafoodList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🥩 Meat</h3>
+          </div>
+          <CartItem
+            cartItems={meatList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🍯 Spice/Sauce/Oil</h3>
+          </div>
+          <CartItem
+            cartItems={spiceList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>🍩 Snack</h3>
+          </div>
+          <CartItem
+            cartItems={snackList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
+          <div className="category-div">
+            <h3>✨ Etc</h3>
+          </div>
+          <CartItem
+            cartItems={etcList}
+            handleChange={this.handleChange}
+            handleRemove={this.handleRemove}
+          />
         </div>
 
         <div className="total">
