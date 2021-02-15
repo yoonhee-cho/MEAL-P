@@ -394,3 +394,18 @@ input:focus {
   float: right;
   padding: 10px;
 }
+
+.item-name {
+  cursor: pointer;
+}
+
+.togglebox {
+  padding-left: 20px;
+}
+.completed {
+  text-decoration: line-through;
+}
+
+.incompleted {
+  padding-left: 10px;
+}

@@ -12,6 +12,7 @@ export class Cart extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
   }
 
   async componentDidMount() {
@@ -73,6 +74,34 @@ export class Cart extends React.Component {
     await this.props.deleteItem(userId, item)
   }
 
+  async handleToggle(event, item) {
+    event.preventDefault()
+
+    let newItems = this.state.items
+    console.log('newItems', newItems)
+
+    let toggleItem = newItems.filter(el => {
+      return el[0].groceryitemId === item.id
+    })
+
+    toggleItem[0].isSelected = !toggleItem[0].isSelected
+    console.log('newItemsAFTER', toggleItem)
+
+    const userId = this.props.user.id
+
+    await this.props.updateItem(userId, item)
+
+    await this.props.setCartItems(userId)
+
+    const toggledItemInCart = this.props.cart.map(item => {
+      return item.orderedItems
+    })
+
+    this.setState({
+      items: toggledItemInCart
+    })
+  }
+
   render() {
     const cartItems = this.props.cart
 
@@ -96,6 +125,7 @@ export class Cart extends React.Component {
             cartItems={vegList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🍓 Fruit</h3>
@@ -104,6 +134,7 @@ export class Cart extends React.Component {
             cartItems={fruitList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🍚 Grain</h3>
@@ -112,6 +143,7 @@ export class Cart extends React.Component {
             cartItems={grainList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🧀 Diary</h3>
@@ -120,6 +152,7 @@ export class Cart extends React.Component {
             cartItems={diaryList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🦐 Seafood</h3>
@@ -128,6 +161,7 @@ export class Cart extends React.Component {
             cartItems={seafoodList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🥩 Meat</h3>
@@ -136,6 +170,7 @@ export class Cart extends React.Component {
             cartItems={meatList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🍯 Spice/Sauce/Oil</h3>
@@ -144,6 +179,7 @@ export class Cart extends React.Component {
             cartItems={spiceList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>🍩 Snack</h3>
@@ -152,6 +188,7 @@ export class Cart extends React.Component {
             cartItems={snackList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
           <div className="category-div">
             <h3>✨ Etc</h3>
@@ -160,6 +197,7 @@ export class Cart extends React.Component {
             cartItems={etcList}
             handleChange={this.handleChange}
             handleRemove={this.handleRemove}
+            handleToggle={this.handleToggle}
           />
         </div>
 

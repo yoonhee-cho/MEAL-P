@@ -42,7 +42,8 @@ class Mealplan extends React.Component {
     })
 
     this.setState({
-      items: orderedItems
+      items: orderedItems,
+      searchTerm: ''
     })
   }
 
