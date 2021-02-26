@@ -6,12 +6,16 @@ import user from './user'
 import itemReducer from './item'
 import singleItemReducer from './singleItem'
 import cartReducer from './cart'
+import menusReducer from './menu'
+import singleMenuReducer from './singleMenu'
 
 const reducer = combineReducers({
   user,
   items: itemReducer,
   item: singleItemReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  menus: menusReducer,
+  menu: singleMenuReducer
 })
 
 const middleware = composeWithDevTools(

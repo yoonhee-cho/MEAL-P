@@ -2,9 +2,8 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../../store'
-import Burger from './Burger'
-import {Button} from '../Button'
+import {logout} from '../store'
+import {Button} from './Button'
 
 const Navbar = ({handleClick, isLoggedIn, userId}) => {
   const [open, setOpen] = useState(false)
@@ -16,8 +15,6 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => {
           <i className="fas fa-utensils" />MEAL :P
         </Link>
       </h1>
-
-      {/* <Burger open={open} setOpen={setOpen} />  */}
 
       <div
         className="menu-icon"
@@ -38,7 +35,7 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => {
             </Link>
           </li>
           <li>
-            <Link className="nav-links" to={'/mealplan/' + userId}>
+            <Link className="nav-links" to="/mealplan">
               Meal Plan
             </Link>
           </li>
@@ -56,8 +53,6 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => {
         </ul>
       ) : (
         <div className={open ? 'nav-menu active' : 'nav-menu'}>
-          {/* <Link to="/login" className="nav-button-mobile"><Button>Login</Button></Link>
-            <Link to="/signup" className="nav-button-mobile"><Button>Sign Up</Button></Link> */}
           <Link to="/login" className="nav-button-mobile">
             Login
           </Link>

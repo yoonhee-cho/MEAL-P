@@ -27,7 +27,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/mealplan/:userId" component={Mealplan} />
+            <Route path="/mealplan" component={Mealplan} />
             <Route path="/recipeSearch" component={RecipeSearch} />
           </Switch>
         )}

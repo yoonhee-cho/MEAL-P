@@ -105,24 +105,9 @@ a {
 }
 
 .nav-menu {
-  /* display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-gap: 20px;
-  list-style: none;
-  text-align: center;
-  width: 70vw; */
   display: flex;
   list-style: none;
   padding-left: 0;
-
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  list-style: none;
-
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 2rem; */
 }
 
 .nav-links {
@@ -247,62 +232,11 @@ a {
 
 /* ------------------------------------------------------- */
 
-#weeklyPricesContainer {
-  padding: 1rem 5rem 0 5rem;
-  height: 100vh;
-  background: #0b686b; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #011b64,
-    #8e2de2
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #004146,
-    #6b7aa0
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.chartContainer {
-  width: 75%;
-  padding-right: 2rem;
-}
-
-.fitnessRight {
-  width: 25%;
-  padding-left: 2rem;
-}
-
-#addMeasurement {
-  width: 300px;
-  background-color: whitesmoke;
-}
-
-#addMeasurementHeader {
-  letter-spacing: 0.1rem;
-  padding: 1rem 0 1rem 1rem;
-  font-size: 1rem;
-}
-
-#addMeasurementHeader h3 {
-  text-transform: uppercase;
-}
-
-#addMeasurementSubmit {
-  /* background: var(--purple); */
-  background-color: #6b7aa0;
-  text-transform: uppercase;
-  color: white;
-  letter-spacing: 0.1rem;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 0 0.5rem 0;
-}
 /* -----------------------MEAL PLAN-------------------------------- */
 .app-background {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
   padding-top: 100px;
 }
@@ -343,9 +277,6 @@ input:focus {
   outline: 0;
 }
 
-.item-search-result-box {
-}
-
 .item-detail {
   display: flex;
   flex-direction: row;
@@ -368,6 +299,128 @@ input:focus {
   color: #fff;
   background: var(--primary);
   border: none;
+}
+/* -----------------------MEAL PLAN-------------------------------- */
+.week-name-box {
+  min-width: 900px;
+  margin-right: 6rem;
+  box-sizing: border-box;
+  flex-direction: row;
+}
+
+.week-name-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fa-chevron-circle-left {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.fa-chevron-circle-right {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.year-month {
+  font-weight: bolder;
+  padding: 0.5rem;
+}
+
+.week-name {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dayName {
+  background-color: var(--primary);
+  width: 100%;
+  color: white;
+  height: 7rem;
+  width: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px var(--primary);
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.col {
+  color: var(--brown);
+  height: 7rem;
+  width: 7rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: solid 1px var(--primary);
+  padding-top: 10px;
+  padding-left: 10px;
+  overflow: scroll;
+  flex-direction: column;
+}
+
+.fa-plus-circle {
+  color: var(--primary);
+  padding-left: 4px;
+}
+.not-same-month {
+  color: lightgrey;
+}
+
+.rounded-tl-corner {
+  border-top-left-radius: 1rem;
+}
+.rounded-tr-corner {
+  border-top-right-radius: 1rem;
+}
+
+.rounded-bl-corner {
+  border-bottom-left-radius: 1rem;
+}
+.rounded-br-corner {
+  border-bottom-right-radius: 1rem;
+}
+
+.same-day {
+  background-color: #d3dafc;
+  color: white;
+}
+
+.day-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu {
+  width: 100px;
+  box-sizing: border-box;
+}
+/* -----------------------Modal-------------------------------- */
+
+.modal {
+  width: 500px;
+  background: white;
+  border: 1px solid #ccc;
+  transition: 1.1s ease-out;
+  box-shadow: 1rem 0 0 rgba(black, 0.2);
+}
+
+h2 {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+  margin: 0;
+}
+.content {
+  padding: 1rem;
+}
+
+#centered-toggle-button {
+  position: absolute;
 }
 
 /* -----------------------Cart -------------------------------- */

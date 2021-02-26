@@ -2,7 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchItems} from '../store/item'
 import {fetchCartItems, addItemToCart} from '../store/cart'
+import {fetchMenus, addMenuThunk} from '../store/menu'
+
 import Cart from './Cart'
+import Calendar from './Calendar'
 
 class Mealplan extends React.Component {
   constructor(props) {
@@ -26,6 +29,8 @@ class Mealplan extends React.Component {
     this.setState({
       items: orderedItems
     })
+
+    await this.props.fetchMenus()
   }
 
   handleChange(event) {
@@ -51,6 +56,8 @@ class Mealplan extends React.Component {
     const itemsArr = this.props.itemsInReact
     return (
       <div className="app-background">
+        <Calendar menus={this.props.menus} addMenu={this.props.addMenuThunk} />
+
         <div className="main-container">
           <form className="add-item-box">
             <input
@@ -104,16 +111,23 @@ const mapStateToProps = state => {
   return {
     itemsInReact: state.items,
     userInReact: state.user,
-    cartInReact: state.cart
+    cartInReact: state.cart,
+    menus: state.menus
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchItemsInReact: () => dispatch(fetchItems()),
+
     addItemToCartInReact: (item, userId) =>
       dispatch(addItemToCart(item, userId)),
-    fetchCartItemsInReact: userId => dispatch(fetchCartItems(userId))
+
+    fetchCartItemsInReact: userId => dispatch(fetchCartItems(userId)),
+
+    fetchMenus: () => dispatch(fetchMenus()),
+
+    addMenuThunk: menu => dispatch(addMenuThunk(menu))
   }
 }
 

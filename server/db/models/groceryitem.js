@@ -25,11 +25,6 @@ const Groceryitem = db.define('groceryitem', {
     ),
     allowNull: false
   }
-  //item supply stock // I guess I don't need this for my app
-  // stock: {
-  //   type: Sequelize.INTEGER,
-  //   defaultValue: 1
-  // }
 })
 
 module.exports = Groceryitem
