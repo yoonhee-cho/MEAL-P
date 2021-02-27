@@ -3,8 +3,6 @@ import Form from './Form'
 import Recipes from './Recipes'
 import {Grid} from '@material-ui/core'
 
-// const API_KEY = ''
-
 class RecipeSearch extends Component {
   state = {
     recipes: []
@@ -15,14 +13,14 @@ class RecipeSearch extends Component {
     const recipeName = e.target.elements.recipeName.value
 
     const apiCall = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://recipesapi.herokuapp.com/api/search?q=${recipeName}&page=3`
-      // `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata`
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeName}`
     )
     const data = await apiCall.json()
-    this.setState({recipes: data.recipes})
+    this.setState({recipes: data.meals})
   }
 
   render() {
+    console.log('recipe', this.state.recipes)
     return (
       <div className="recipeSearch">
         <Grid container>

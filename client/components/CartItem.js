@@ -1,19 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
 
 const CartItem = props => {
+  const [toggle, setToggle] = useState(false)
+
+  function handleToggle(event) {
+    event.preventDefault()
+    return setToggle(!toggle)
+  }
+
   return (
     <div className="item-list">
       {props.cartItems &&
         props.cartItems.map(item => {
           return (
             <div key={item.id} className="item-container">
-              <div
-                className="item-name"
-                onClick={event => props.handleToggle(event, item)}
-              >
-                {item.orderedItems[0].isSelected ? (
+              <div className="item-name" onClick={event => handleToggle(event)}>
+                {toggle ? (
                   <div className="togglebox">
                     <FontAwesomeIcon icon={faCheckCircle} />
                     <span className="completed">{item.name}</span>

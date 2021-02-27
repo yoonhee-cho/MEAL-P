@@ -12,7 +12,9 @@ class AddMenuModal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange = event => {
+  handleChange(event) {
+    event.preventDefault()
+
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -26,9 +28,11 @@ class AddMenuModal extends React.Component {
       createdAt: this.props.date
     }
     this.props.addMenu(menu)
+    this.props.handleToggleModal()
   }
 
   render() {
+    console.log('menuToAdd', this.props.menu)
     return (
       <>
         {this.props.show ? (
@@ -52,13 +56,17 @@ class AddMenuModal extends React.Component {
                       type="text"
                       name="name"
                       value={this.state.name}
-                      onChange={this.handleChange}
+                      onChange={event => this.handleChange(event)}
                     />
                   </label>
 
                   <label>
                     Category :
-                    <select name="category" onChange={this.handleChange}>
+                    <select
+                      name="category"
+                      onChange={event => this.handleChange(event)}
+                      className="add-menu-form-input"
+                    >
                       <option name="category" value="" />
                       <option name="category" value="breakfast">
                         Breakfast
@@ -75,13 +83,11 @@ class AddMenuModal extends React.Component {
                     </select>
                   </label>
 
-                  <button type="submit" value="Submit">
+                  <button type="submit" value="Submit" className="add-menu-btn">
                     Submit
                   </button>
                 </form>
               </div>
-
-              <div className="modal-footer" />
             </div>
           </div>
         ) : null}

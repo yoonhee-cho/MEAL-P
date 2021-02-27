@@ -38,8 +38,6 @@ class EditMenuModal extends React.Component {
   }
 
   render() {
-    console.log('m??enu', this.props.menu)
-
     return (
       <>
         {this.props.show ? (
@@ -73,6 +71,7 @@ class EditMenuModal extends React.Component {
                       name="category"
                       onChange={this.handleChange}
                       defaultValue={this.props.menu.category}
+                      className="add-menu-form-input"
                     >
                       <option name="category" value="" />
                       <option name="category" value="breakfast">
@@ -90,19 +89,20 @@ class EditMenuModal extends React.Component {
                     </select>
                   </label>
 
-                  <button type="submit">Edit</button>
+                  <button className="add-menu-btn" type="submit">
+                    Edit
+                  </button>
+                  <button
+                    type="submit"
+                    className="add-menu-btn"
+                    onClick={event => {
+                      this.handleDelete(event)
+                    }}
+                  >
+                    Delete
+                  </button>
                 </form>
-                <button
-                  type="submit"
-                  onClick={event => {
-                    this.handleDelete(event)
-                  }}
-                >
-                  Delete
-                </button>
               </div>
-
-              <div className="modal-footer" />
             </div>
           </div>
         ) : null}

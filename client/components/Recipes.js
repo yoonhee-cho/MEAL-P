@@ -10,7 +10,7 @@ const Recipes = props => {
       {recipes &&
         recipes.map(recipe => {
           return (
-            <Grid item xs={12} sm={4} key={recipe.recipe_id}>
+            <Grid item xs={12} sm={4} key={recipe.mealId}>
               <RecipeCard recipe={recipe} />
             </Grid>
           )

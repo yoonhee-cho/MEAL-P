@@ -25,16 +25,16 @@ const RecipeCard = props => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={recipe.image_url}
+        image={recipe.strMealThumb}
         title="Contemplative Reptile"
       />
 
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          {recipe.title}
+          {recipe.strMeal}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Publisher : {recipe.publisher}
+          Category : {recipe.strCategory}, {recipe.strArea}
         </Typography>
       </CardContent>
 
