@@ -13,14 +13,14 @@
 * Write a grocery shopping list based on your meal menus<br/>
 * Adjust the items based on the estimated price within your budget<br/>
 
-![Alt Text](https://thumbs.gfycat.com/DecisiveComfortableBordercollie-size_restricted.gif)
+![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-size_restricted.gif)
 
 * Search recipes by ingredients to get meal plan ideas<br/>
 * Save the recipes you want to keep<br/>
 
 ## 🛠 Tech stacks that I used for this project
 
-<p align="center"> 
+<p align="left"> 
    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://icongr.am/devicon/javascript-original.svg?size=128&color=currentColor" alt="javascript" width="40" height="40"/> </a> 
    <a href="https://reactjs.org/" target="_blank"> <img src="https://icongr.am/devicon/react-original.svg?size=128&color=currentColor" alt="react" width="40" height="40"/> </a> 
    <a href="https://nodejs.org" target="_blank"> <img src="https://icongr.am/devicon/nodejs-original-wordmark.svg?size=128&color=currentColor" alt="nodejs" width="40" height="40"/> </a> 
