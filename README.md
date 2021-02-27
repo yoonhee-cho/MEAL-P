@@ -14,7 +14,8 @@
 * Adjust the items based on the estimated price within your budget<br/>
 
 ![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-size_restricted.gif)
-![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-small.gif)
+
+<div style='position:relative; padding-bottom:calc(54.17% + 44px)'><iframe src='https://gfycat.com/ifr/CleverCreamyFrigatebird' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
 
 * Search recipes by ingredients to get meal plan ideas<br/>
 * Save the recipes you want to keep<br/>
