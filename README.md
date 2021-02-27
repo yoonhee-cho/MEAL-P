@@ -7,7 +7,7 @@
 
 <img width="579" alt="Screen Shot 2021-01-21 at 12 30 54 PM" src="https://user-images.githubusercontent.com/42276116/105388367-8fe8c580-5be4-11eb-9213-59585e039d70.png">
 
-![Alt Text](https://gfycat.com/frightenedvibrantbarasingha)
+![Alt Text](https://thumbs.gfycat.com/FrightenedVibrantBarasingha-size_restricted.gif)
 
 1.  Search recipes by ingredients to get meal plan ideas<br/>
 2.  Plan your meals on the calendar <br/>
