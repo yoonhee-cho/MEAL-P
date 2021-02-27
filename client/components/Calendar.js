@@ -18,7 +18,6 @@ function Calendar(props) {
   const [showModal, setShowModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const [menuToEdit, setMenuToEdit] = useState('')
-  const [menuToAdd, setMenuToAdd] = useState({})
   const data = takeMonth(selectedDate)()
 
   function dayColor(day) {
@@ -33,7 +32,6 @@ function Calendar(props) {
   }
 
   function handleToggleAddModal() {
-    setMenuToAdd({})
     return setShowModal(!showModal)
   }
 
@@ -86,7 +84,6 @@ function Calendar(props) {
                         handleToggleModal={handleToggleAddModal}
                         addMenu={props.addMenu}
                         date={selectedDate}
-                        menu={menuToAdd}
                       />
                     </div>
 
@@ -130,11 +127,4 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    // editMenu : (menuId, menuToUpdate) => dispatch(editMenuThunk(menuId, menuToUpdate)),
-    // deleteMenu : (menuId) => dispatch(deleteMenuThunk(menuId))
-  }
-}
-
-export default connect(mapState, mapDispatch)(Calendar)
+export default connect(mapState)(Calendar)

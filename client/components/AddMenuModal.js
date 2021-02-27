@@ -22,17 +22,18 @@ class AddMenuModal extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+
     const menu = {
       name: this.state.name,
       category: this.state.category,
       createdAt: this.props.date
     }
+
     this.props.addMenu(menu)
     this.props.handleToggleModal()
   }
 
   render() {
-    console.log('menuToAdd', this.props.menu)
     return (
       <>
         {this.props.show ? (

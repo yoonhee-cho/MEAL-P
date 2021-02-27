@@ -27,7 +27,6 @@ router.post('/', async (req, res, next) => {
       category: req.body.category,
       createdAt: req.body.createdAt
     }
-    // const newItem = await Menu.create(req.body)
     const newMenu = await Menu.create(newItem)
     res.json(newMenu)
   } catch (err) {
