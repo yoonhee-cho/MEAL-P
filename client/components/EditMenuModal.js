@@ -1,6 +1,6 @@
 import React from 'react'
 
-class AddMenuModal extends React.Component {
+class EditMenuModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -9,7 +9,8 @@ class AddMenuModal extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleChange = event => {
@@ -18,24 +19,34 @@ class AddMenuModal extends React.Component {
     })
   }
 
-  handleSubmit(event) {
+  handleEdit(event) {
     event.preventDefault()
-    const menu = {
+    const menuId = this.props.menu.id
+    const menuToEdit = {
       name: this.state.name,
-      category: this.state.category,
-      createdAt: this.props.date
+      category: this.state.category
     }
-    this.props.addMenu(menu)
+    this.props.editMenu(menuId, menuToEdit)
+    this.props.handleToggleModal()
+  }
+
+  handleDelete(event) {
+    event.preventDefault()
+    const menuId = this.props.menu.id
+    this.props.deleteMenu(menuId)
+    this.props.handleToggleModal()
   }
 
   render() {
+    console.log('m??enu', this.props.menu)
+
     return (
       <>
         {this.props.show ? (
           <div className="modal" onClick={() => this.props.handleToggleModal()}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
               <div className="modal-header">
-                <h4 className="modal-title">ADD MENU</h4>
+                <h4 className="modal-title">EDIT/DELETE MENU</h4>
                 <i
                   className="fas fa-times"
                   onClick={() => this.props.handleToggleModal()}
@@ -43,7 +54,7 @@ class AddMenuModal extends React.Component {
               </div>
 
               <div className="modal-body">
-                <form className="add-menu-form" onSubmit={this.handleSubmit}>
+                <form className="add-menu-form" onSubmit={this.handleEdit}>
                   <label>
                     Menu Name :
                     <input
@@ -51,14 +62,18 @@ class AddMenuModal extends React.Component {
                       className="add-menu-form-input"
                       type="text"
                       name="name"
-                      value={this.state.name}
                       onChange={this.handleChange}
+                      defaultValue={this.props.menu.name}
                     />
                   </label>
 
                   <label>
                     Category :
-                    <select name="category" onChange={this.handleChange}>
+                    <select
+                      name="category"
+                      onChange={this.handleChange}
+                      defaultValue={this.props.menu.category}
+                    >
                       <option name="category" value="" />
                       <option name="category" value="breakfast">
                         Breakfast
@@ -75,10 +90,16 @@ class AddMenuModal extends React.Component {
                     </select>
                   </label>
 
-                  <button type="submit" value="Submit">
-                    Submit
-                  </button>
+                  <button type="submit">Edit</button>
                 </form>
+                <button
+                  type="submit"
+                  onClick={event => {
+                    this.handleDelete(event)
+                  }}
+                >
+                  Delete
+                </button>
               </div>
 
               <div className="modal-footer" />
@@ -89,4 +110,4 @@ class AddMenuModal extends React.Component {
     )
   }
 }
-export default AddMenuModal
+export default EditMenuModal

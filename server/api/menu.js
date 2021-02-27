@@ -24,7 +24,8 @@ router.post('/', async (req, res, next) => {
   try {
     const newItem = {
       name: req.body.name,
-      category: req.body.category
+      category: req.body.category,
+      createdAt: req.body.createdAt
     }
     // const newItem = await Menu.create(req.body)
     const newMenu = await Menu.create(newItem)

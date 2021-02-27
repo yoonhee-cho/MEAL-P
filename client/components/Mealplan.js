@@ -2,10 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchItems} from '../store/item'
 import {fetchCartItems, addItemToCart} from '../store/cart'
-import {fetchMenus, addMenuThunk} from '../store/menu'
+import {fetchMenus, addMenuThunk, deleteMenuThunk} from '../store/menu'
 
 import Cart from './Cart'
 import Calendar from './Calendar'
+import {editMenuThunk} from '../store/singleMenu'
 
 class Mealplan extends React.Component {
   constructor(props) {
@@ -56,7 +57,12 @@ class Mealplan extends React.Component {
     const itemsArr = this.props.itemsInReact
     return (
       <div className="app-background">
-        <Calendar menus={this.props.menus} addMenu={this.props.addMenuThunk} />
+        <Calendar
+          menus={this.props.menus}
+          addMenu={this.props.addMenuThunk}
+          editMenu={this.props.editMenuThunk}
+          deleteMenu={this.props.deleteMenuThunk}
+        />
 
         <div className="main-container">
           <form className="add-item-box">
@@ -127,7 +133,12 @@ const mapDispatchToProps = dispatch => {
 
     fetchMenus: () => dispatch(fetchMenus()),
 
-    addMenuThunk: menu => dispatch(addMenuThunk(menu))
+    addMenuThunk: menu => dispatch(addMenuThunk(menu)),
+
+    editMenuThunk: (menuId, menuToUpdate) =>
+      dispatch(editMenuThunk(menuId, menuToUpdate)),
+
+    deleteMenuThunk: menuId => dispatch(deleteMenuThunk(menuId))
   }
 }
 

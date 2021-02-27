@@ -11,10 +11,13 @@ import {
 import WeekNames from './WeekNames'
 import {connect} from 'react-redux'
 import AddMenuModal from './AddMenuModal'
+import EditMenuModal from './EditMenuModal'
 
 function Calendar(props) {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [showModal, setShowModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [menuToEdit, setMenuToEdit] = useState('')
   const data = takeMonth(selectedDate)()
 
   function dayColor(day) {
@@ -28,11 +31,16 @@ function Calendar(props) {
     if (dIdx === 6) return 'rounded-br-corner'
   }
 
-  function handleToggleModal() {
+  function handleToggleAddModal() {
     return setShowModal(!showModal)
   }
 
-  console.log('hello', props.menus)
+  function handleToggleEditModal(menu) {
+    setMenuToEdit(menu)
+    return setShowEditModal(!showEditModal)
+  }
+
+  console.log('hellddo', selectedDate)
   return (
     <>
       <div className="week-name-box">
@@ -69,7 +77,13 @@ function Calendar(props) {
                       {format(day, 'dd')}
                       <i
                         className="fas fa-plus-circle"
-                        onClick={() => handleToggleModal()}
+                        onClick={() => handleToggleAddModal()}
+                      />
+                      <AddMenuModal
+                        show={showModal}
+                        handleToggleModal={handleToggleAddModal}
+                        addMenu={props.addMenu}
+                        date={selectedDate}
                       />
                     </div>
 
@@ -79,8 +93,20 @@ function Calendar(props) {
                           isSameDay(parseISO(menu.createdAt), day)
                         )
                         .map(menu => (
-                          <div key={menu.id} className="menu">
+                          <div
+                            key={menu.id}
+                            className="menu"
+                            onClick={() => handleToggleEditModal(menu)}
+                          >
                             {menu.name}
+
+                            <EditMenuModal
+                              show={showEditModal}
+                              handleToggleModal={handleToggleEditModal}
+                              menu={menuToEdit}
+                              editMenu={props.editMenu}
+                              deleteMenu={props.deleteMenu}
+                            />
                           </div>
                         ))}
                   </div>
@@ -90,20 +116,22 @@ function Calendar(props) {
           )
         })}
       </div>
-
-      <AddMenuModal show={showModal} handleToggleModal={handleToggleModal} />
     </>
   )
 }
 
 const mapState = state => {
   return {
-    menus: state.menus
+    menus: state.menus,
+    menu: state.menu
   }
 }
 
 const mapDispatch = dispatch => {
-  return {}
+  return {
+    // editMenu : (menuId, menuToUpdate) => dispatch(editMenuThunk(menuId, menuToUpdate)),
+    // deleteMenu : (menuId) => dispatch(deleteMenuThunk(menuId))
+  }
 }
 
 export default connect(mapState, mapDispatch)(Calendar)
