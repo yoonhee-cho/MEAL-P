@@ -7,13 +7,17 @@
 
 <!-- <img width="579" alt="Screen Shot 2021-01-21 at 12 30 54 PM" src="https://user-images.githubusercontent.com/42276116/105388367-8fe8c580-5be4-11eb-9213-59585e039d70.png"> -->
 
-![Alt Text](https://thumbs.gfycat.com/FrightenedVibrantBarasingha-size_restricted.gif)
+<!-- ![Alt Text](https://thumbs.gfycat.com/FrightenedVibrantBarasingha-size_restricted.gif) -->
+
+![Alt Text](https://thumbs.gfycat.com/TameBareAmethystinepython-small.gif)
 
 * Plan your meals on the calendar <br/>
 * Write a grocery shopping list based on your meal menus<br/>
 * Adjust the items based on the estimated price within your budget<br/>
 
-![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-size_restricted.gif)
+<!-- ![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-size_restricted.gif) -->
+
+![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-small.gif)
 
 * Search recipes by ingredients to get meal plan ideas<br/>
 * Save the recipes you want to keep<br/>
