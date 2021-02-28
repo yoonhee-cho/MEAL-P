@@ -10,10 +10,11 @@
 <!-- ![Alt Text](https://thumbs.gfycat.com/FrightenedVibrantBarasingha-size_restricted.gif) -->
 
 ![Alt Text](https://thumbs.gfycat.com/TameBareAmethystinepython-small.gif)
+![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-small.gif)
 
-* Plan your meals on the calendar <br/>
-* Write a grocery shopping list based on your meal menus<br/>
-* Adjust the items based on the estimated price within your budget<br/>
+1.  Plan your meals on the calendar <br/>
+2.  Write a grocery shopping list based on your meal menus<br/>
+3.  Adjust the items based on the estimated price within your budget<br/>
 
 <!-- ![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-size_restricted.gif) -->
 
