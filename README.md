@@ -10,6 +10,8 @@
 <!-- ![Alt Text](https://thumbs.gfycat.com/FrightenedVibrantBarasingha-size_restricted.gif) -->
 
 ![Alt Text](https://thumbs.gfycat.com/TameBareAmethystinepython-small.gif)
+![Alt Text](./demo_1_gfycat.gif)
+![Alt Text](./demo_2_gfycat.gif)
 
 ## ⭐️ Main Features <br>
 
