@@ -10,6 +10,9 @@
 <!-- ![Alt Text](https://thumbs.gfycat.com/FrightenedVibrantBarasingha-size_restricted.gif) -->
 
 ![Alt Text](https://thumbs.gfycat.com/TameBareAmethystinepython-small.gif)
+
+## ⭐️ Main Features <br>
+
 ![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-small.gif)
 
 1.  Plan your meals on the calendar <br/>
