@@ -21,7 +21,7 @@
 
 <!-- ![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-size_restricted.gif) -->
 
-![Alt Text](https://thumbs.gfycat.com/CleverCreamyFrigatebird-small.gif)
+![](https://thumbs.gfycat.com/CleverCreamyFrigatebird-small.gif)
 
 * Search recipes by ingredients to get meal plan ideas<br/>
 * Save the recipes you want to keep<br/>
